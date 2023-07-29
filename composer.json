@@ -1,0 +1,19 @@
+{
+    "name": "abdos/mvc-framework",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+            
+        }
+    },
+    "authors": [
+        {
+            "name": "abdosql",
+            "email": "abdosql@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+      "ext-pdo": "*"
+    }
+}
