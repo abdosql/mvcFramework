@@ -47,4 +47,9 @@ class User extends DbModel
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         return parent::save();
     }
+
+    public function primaryKey(): string
+    {
+        return 'id';
+    }
 }

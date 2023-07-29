@@ -39,4 +39,13 @@ class Session
             }
         }
     }
+
+    public function set(string $string, string $primaryKey)
+    {
+
+    }
+
+    public function get(string $string)
+    {
+    }
 }

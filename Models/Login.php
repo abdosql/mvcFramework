@@ -19,7 +19,7 @@ class Login extends Model
     public function login(){
         $U = new User();
         //Finding the user
-        $User = $U->Find(["email" => $this->email]);
+        $User = $U->FindOne(["email" => $this->email]);
         if (!$User){
             $this->addError("email", "Their is no user with this email.");
         }elseif (!password_verify($this->password, $User->password)){

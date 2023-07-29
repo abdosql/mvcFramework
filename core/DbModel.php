@@ -4,6 +4,7 @@ namespace app\core;
 
 abstract class DbModel extends Model
 {
+    abstract public  function primaryKey(): string;
     abstract public function tableName() : string;
     abstract public function attributesList() : array;
 
@@ -27,7 +28,7 @@ abstract class DbModel extends Model
         }
         return $statement->execute();
     }
-    public function Find(array $where){
+    public function FindOne(array $where){
         $tableName = static::tableName();
         $attributes = array_keys($where);
         $conditions = implode("AND", array_map(fn($attr)=> "$attr = :$attr", $attributes));
