@@ -25,7 +25,7 @@ class AuthController extends Controller
         }
         $this->setLayout("main");
         return $this->render("Login",[
-            'model' => $loginForm
+            'model' => $loginForm,
         ]);
     }
     public function Register(Request $request, Response $response, Session $session)
@@ -50,5 +50,8 @@ class AuthController extends Controller
                 'model' => $User,
             ]);
         }
+    }
+    public function _logout(){
+        Application::$app->_logout();
     }
 }

@@ -1,10 +1,7 @@
 <?php $session = \app\core\Application::$app->session?>
+<?php $user = \app\core\Application::$app->User?>
 <!doctype html>
 <html lang="en">
-<?php
-var_dump(\app\core\Application::$app->User);
-var_dump($_SESSION);
-?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +28,12 @@ var_dump($_SESSION);
                         <a class="nav-link" href="/Register">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Login">Login</a>
+                        <?php if (\app\core\Application::$app->isGuest()){?>
+                            <a class="nav-link" href="/Login">Login</a>
+                        <?php }else{?>
+                            <a class="nav-link" href="/Logout">Logout</a>
+                            <?=$user->__get("email"); ?>
+                        <?php }?>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">

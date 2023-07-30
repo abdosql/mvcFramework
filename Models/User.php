@@ -1,11 +1,11 @@
 <?php
 
 namespace app\Models;
-use app\core\Application;
-use app\core\DbModel;
-use app\core\Model;
 
-class User extends DbModel
+use app\core\UserModel;
+use Exception;
+
+class User extends UserModel
 {
     public int $id = 0;
 
@@ -53,5 +53,17 @@ class User extends DbModel
     public function primaryKey(): string
     {
         return 'id';
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function __get($property): ?string
+    {
+        if (property_exists($this, $property)) {
+            return $this->{$property};
+        } else {
+            throw new Exception("Property '{$property}' does not exist.");
+        }
     }
 }
