@@ -51,7 +51,11 @@ class AuthController extends Controller
             ]);
         }
     }
-    public function _logout(){
-        Application::$app->_logout();
+    public function _logout(Request $request, Response $response, Session $session){
+        $this->setLayout("main");
+
+        Application::$app->logout();
+        $response->redirect("/");
+        $session->setFlash("success", "Now You Are Loged Out.");
     }
 }

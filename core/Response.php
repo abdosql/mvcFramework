@@ -8,4 +8,7 @@ class Response
     public function redirect(string $path){
         header("Location: $path");
     }
+    public function refresh($path){
+        header("Refresh: 0.6; URL=$path");
+    }
 }

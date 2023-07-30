@@ -49,7 +49,7 @@ class Application
     {
         return $this->User === null;
     }
-    public function _logout(){
+    public function logout(){
         $this->User = null;
         $this->session->remove("user");
     }
