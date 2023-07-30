@@ -7,7 +7,7 @@ class Session
     protected const FLASH_KEY = "flash_messages";
     public function __construct(){
         session_start();
-        $flashMessages = $_SESSION[self::FLASH_KEY];
+        $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
         foreach ($flashMessages as $index => &$flashMessage) {
             $flashMessage["removed"] = true;
         }
@@ -40,12 +40,20 @@ class Session
         }
     }
 
-    public function set(string $string, string $primaryKey)
+    public function set(string $key, string $value)
     {
-
+        $_SESSION[$key] = $value;
     }
 
-    public function get(string $string)
+    public function get(string $key)
     {
+        $session = "";
+        if (isset($_SESSION)) {
+            $session = $_SESSION[$key];
+        }
+        return $session;
+    }
+    public function remove($key){
+        unset($_SESSION[$key]);
     }
 }

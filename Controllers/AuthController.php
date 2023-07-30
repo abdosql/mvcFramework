@@ -19,6 +19,8 @@ class AuthController extends Controller
             $loginForm->loadData($request->getBody());
             if ($loginForm->Validate() && $loginForm->login()){
                 $response->redirect("/");
+            }else{
+                echo "error";
             }
         }
         $this->setLayout("main");

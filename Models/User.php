@@ -7,6 +7,8 @@ use app\core\Model;
 
 class User extends DbModel
 {
+    public int $id = 0;
+
     public string $name = "";
     public string $email = "";
     public string $password = "";
@@ -14,7 +16,7 @@ class User extends DbModel
 
     public function tableName(): string
     {
-        return "User";
+        return "user";
     }
     public function attributesList(): array
     {

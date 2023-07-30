@@ -16,7 +16,8 @@ class Login extends Model
             "password" => [self::RULE_REQUIRED],
         ];
     }
-    public function login(){
+    public function login(): bool
+    {
         $U = new User();
         //Finding the user
         $User = $U->FindOne(["email" => $this->email]);
@@ -26,7 +27,6 @@ class Login extends Model
             $this->addError("password", "The password is incorrect");
             return false;
         }
-        var_dump($User);
-        return Application::$app->login();
+        return Application::$app->login($U);
     }
 }
