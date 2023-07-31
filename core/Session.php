@@ -47,10 +47,11 @@ class Session
 
     public function get(string $key)
     {
-        if (isset($_SESSION[$key])) {
-           return $session = $_SESSION[$key];
+        $session = "";
+        if (isset($_SESSION)) {
+            $session = $_SESSION[$key];
         }
-        return null;
+        return $session;
     }
     public function remove($key){
         unset($_SESSION[$key]);

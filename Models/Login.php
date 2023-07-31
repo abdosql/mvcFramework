@@ -27,6 +27,6 @@ class Login extends Model
             $this->addError("password", "The password is incorrect");
             return false;
         }
-        return Application::$app->login($User);
+        return Application::$app->login($U);
     }
 }

@@ -25,7 +25,7 @@ class AuthController extends Controller
         }
         $this->setLayout("main");
         return $this->render("Login",[
-            'model' => $loginForm,
+            'model' => $loginForm
         ]);
     }
     public function Register(Request $request, Response $response, Session $session)
@@ -52,6 +52,7 @@ class AuthController extends Controller
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function _logout(Request $request, Response $response, Session $session){
         Application::$app->logout();
         $response->redirect("/");
@@ -64,4 +65,6 @@ class AuthController extends Controller
     public function Profile(Request $request, Response $response, Session $session){
         return $this->render("Profile");
     }
+=======
+>>>>>>> parent of 3e412ac (fixing Login)
 }

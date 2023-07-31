@@ -18,10 +18,9 @@ abstract class Model
             if (property_exists($this, $key)) {
                 $this->{$key} = $value;
             } else {
-                return null;
+                return false;
             }
         }
-        return null;
     }
     abstract public function Rules();
     public function Validate(): bool

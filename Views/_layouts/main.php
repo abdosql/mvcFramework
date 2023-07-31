@@ -1,7 +1,10 @@
 <?php $session = \app\core\Application::$app->session?>
-<?php $user = \app\core\Application::$app->User?>
 <!doctype html>
 <html lang="en">
+<?php
+var_dump(\app\core\Application::$app->User);
+var_dump($_SESSION);
+?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +31,7 @@
                         <a class="nav-link" href="/Register">Register</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< HEAD
                         <?php if (\app\core\Application::$app->isGuest()){?>
                             <a class="nav-link" href="/Login">Login</a>
                     </li>
@@ -38,6 +42,9 @@
                     <li class="nav-item">
                             <a class="nav-link" href="/Logout">Logout</a>
                         <?php }?>
+=======
+                        <a class="nav-link" href="/Login">Login</a>
+>>>>>>> parent of 3e412ac (fixing Login)
                     </li>
                 </ul>
                 <div class="d-flex">
