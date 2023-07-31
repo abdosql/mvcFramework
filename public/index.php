@@ -29,6 +29,7 @@ $app->router->get("/Register", [AuthController::class, "Register"]);
 $app->router->post("/Register", [AuthController::class, "Register"]);
 $app->router->get("/Logout", [AuthController::class, "_logout"]);
 $app->router->get("/Profile", [AuthController::class, "Profile"]);
+
 //logout
 //Running The app
 $app->run();

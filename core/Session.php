@@ -22,7 +22,6 @@ class Session
     public function getFlash($key): string
     {
         $message = $_SESSION[self::FLASH_KEY][$key]["value"] ?? null;
-        $currentPath = $_SERVER['PHP_SELF'];
         if (isset($message)){
             return '<div class="alert alert-'.$key.'">'.$message.'</div>';
         }else{

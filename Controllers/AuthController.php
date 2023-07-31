@@ -51,10 +51,15 @@ class AuthController extends Controller
             ]);
         }
     }
+<<<<<<< HEAD
     public function _logout(Request $request, Response $response, Session $session){
         Application::$app->logout();
         $response->redirect("/");
         $session->setFlash("success", "Now You Are Loged Out.");
+=======
+    public function _logout(){
+        Application::$app->_logout();
+>>>>>>> parent of c2a2ace (10)
     }
     public function Profile(Request $request, Response $response, Session $session){
         return $this->render("Profile");

@@ -51,7 +51,7 @@ class Application
     {
         return $this->User === null;
     }
-    public function logout(){
+    public function _logout(){
         $this->User = null;
         $this->session->remove("user");
     }
