@@ -28,6 +28,7 @@ abstract class DbModel extends Model
         }
         return $statement->execute();
     }
+
     public function FindOne(array $where){
         $tableName = static::tableName();
         $attributes = array_keys($where);

@@ -25,9 +25,9 @@ class Router
         $this->routes["post"][$path] = $callback;
     }
     protected function layoutContent() {
-        $layout = "main";
+        $layout = Application::$app->layout;
         if (Application::$app->controller){
-            $layout = Application::$app->controller->layout;
+            $layout = Application::$app->layout;
         }
         ob_start();
         require_once Application::$ROOT_DIR."/Views/_layouts/$layout.php";
@@ -69,5 +69,3 @@ class Router
         }
     }
 }
-
-?>

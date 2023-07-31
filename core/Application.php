@@ -3,17 +3,14 @@
 namespace app\core;
 class Application
 {
+    public string $layout = "main";
     public Router $router;
-    private string $layout = "main";
-
     public Request $request;
     public Response $response;
     public Session $session;
     public ?DbModel $User;
     public DbModel $userClass;
     public ?Controller $controller = null;
-    public ?DbModel $userClass;
-    public Controller $controller;
     public Database $db;
     public static string $ROOT_DIR;
     public static Application $app;
@@ -28,7 +25,6 @@ class Application
         $this->db = new Database($config["db"]);
         $userId = $this->session->get('user');
         $this->userClass = new $config["userClass"];
-        var_dump($userId);
         if ($userId){
             $primaryKey = $this->userClass->primaryKey();
             $this->User = $this->userClass->FindOne([$primaryKey => $userId]);
@@ -42,6 +38,9 @@ class Application
     }
     public function getController(): Controller{
         return $this->controller;
+    }
+    public function isGuest(): bool{
+        return !self::$app->User;
     }
     public function login(DbModel $user): bool{
         echo $user->

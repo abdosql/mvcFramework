@@ -12,7 +12,7 @@ use app\Models\User;
 
 class AuthController extends Controller
 {
-    public function Login(Request $request, Response $response, Session $session)
+    public function Login(Request $request, Response $response)
     {
         $loginForm = new Login();
         if ($request->isPost()){
@@ -51,20 +51,17 @@ class AuthController extends Controller
             ]);
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function _logout(Request $request, Response $response, Session $session){
-        Application::$app->logout();
-        $response->redirect("/");
-        $session->setFlash("success", "Now You Are Loged Out.");
-=======
-    public function _logout(){
-        Application::$app->_logout();
->>>>>>> parent of c2a2ace (10)
+    public function _logout(Request $request, Response $response, Session $session)
+    {
+        $this->setLayout("main");
+        if ($request->isGet()){
+
+            Application::$app->_logout();
+            $response->redirect("/");
+            $session->setFlash("success", "Now You Are Loged Out.");
+        }
     }
     public function Profile(Request $request, Response $response, Session $session){
         return $this->render("Profile");
     }
-=======
->>>>>>> parent of 3e412ac (fixing Login)
 }

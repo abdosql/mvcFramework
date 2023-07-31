@@ -4,8 +4,9 @@ namespace app\Models;
 use app\core\Application;
 use app\core\DbModel;
 use app\core\Model;
+use app\core\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
     public int $id = 0;
 
@@ -49,7 +50,6 @@ class User extends DbModel
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         return parent::save();
     }
-
     public function primaryKey(): string
     {
         return 'id';

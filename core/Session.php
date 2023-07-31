@@ -48,7 +48,7 @@ class Session
     public function get(string $key)
     {
         $session = "";
-        if (isset($_SESSION)) {
+        if (isset($_SESSION[$key])) {
             $session = $_SESSION[$key];
         }
         return $session;

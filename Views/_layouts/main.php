@@ -2,8 +2,7 @@
 <!doctype html>
 <html lang="en">
 <?php
-var_dump(\app\core\Application::$app->User);
-var_dump($_SESSION);
+    $user = \app\core\Application::$app;
 ?>
 <head>
     <meta charset="utf-8">
@@ -27,35 +26,29 @@ var_dump($_SESSION);
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Register">Register</a>
-                    </li>
-                    <li class="nav-item">
-<<<<<<< HEAD
-                        <?php if (\app\core\Application::$app->isGuest()){?>
+                    <?php if ($user->isGuest()){?>
+                        <li class="nav-item">
                             <a class="nav-link" href="/Login">Login</a>
-                    </li>
-                        <?php }else{?>
-                    <li class="nav-item">
-                            <a class="nav-link" href="/Profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="/Logout">Logout</a>
-                        <?php }?>
-=======
-                        <a class="nav-link" href="/Login">Login</a>
->>>>>>> parent of 3e412ac (fixing Login)
-                    </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Register">Register</a>
+                        </li>
+                    <?php }else{?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Profile">Profile</a>
+                        </li>
+                    <?php }?>
                 </ul>
                 <div class="d-flex">
-                    <?php
-                        if (!\app\core\Application::$app->isGuest()){
-                            try {
-                                echo $user->__get("email");
-                            } catch (Exception $e) {
-                            }
-                        }
-                    ?>
+                    <?php if (!$user->isGuest()){?>
+                        <?php try {
+                            echo $user->User->_get("name");
+                        } catch (Exception $e) {
+                        } ?>
+                    <?php }?>
                 </div>
             </div>
         </div>
