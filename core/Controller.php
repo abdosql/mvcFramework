@@ -4,19 +4,19 @@ namespace app\core;
 
 class Controller
 {
-    public $test = 1;
-    private string $layout = "main";
+    public string $layout = "main";
     public function setLayout($l){
         $this->layout = $l;
     }
-    public function getLayout(){
+    public function getLayout(): string
+    {
         return $this->layout;
     }
     public function render($view, $params = []){
         return Application::$app->router->renderView($view, $params);
     }
     public function getBody(){
-        return Application::$app->request->getBody();
+        Application::$app->request->getBody();
     }
 
     

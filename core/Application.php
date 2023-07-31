@@ -4,12 +4,14 @@ namespace app\core;
 class Application
 {
     public Router $router;
+    private string $layout = "main";
+
     public Request $request;
     public Response $response;
     public Session $session;
     public ?DbModel $User;
     public DbModel $userClass;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public Database $db;
     public static string $ROOT_DIR;
     public static Application $app;

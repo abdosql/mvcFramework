@@ -25,7 +25,10 @@ class Router
         $this->routes["post"][$path] = $callback;
     }
     protected function layoutContent() {
-        $layout = Application::$app->getController()->getLayout();
+        $layout = "main";
+        if (Application::$app->controller){
+            $layout = Application::$app->controller->layout;
+        }
         ob_start();
         require_once Application::$ROOT_DIR."/Views/_layouts/$layout.php";
         return ob_get_clean();
@@ -33,9 +36,7 @@ class Router
     public function renderView($view, $params = []) {
         $_layout = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view, $params);
-        $outputContent =  str_replace("{{view}}",$viewContent,$_layout);
-
-        return $outputContent;
+        return str_replace("{{view}}",$viewContent,$_layout);
     }
     protected function renderOnlyView($view, $params = []){
         foreach ($params as $key => $value) {
