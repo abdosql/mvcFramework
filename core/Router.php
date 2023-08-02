@@ -1,6 +1,8 @@
 <?php
 namespace app\core;
 
+use app\core\Exceptions\NotFoundException;
+
 class Router
 {
     protected array $routes = [];
@@ -24,28 +26,9 @@ class Router
     {
         $this->routes["post"][$path] = $callback;
     }
-    protected function layoutContent() {
-        $layout = Application::$app->layout;
-        if (Application::$app->controller){
-            $layout = Application::$app->layout;
-        }
-        ob_start();
-        require_once Application::$ROOT_DIR."/Views/_layouts/$layout.php";
-        return ob_get_clean();
-    }
-    public function renderView($view, $params = []) {
-        $_layout = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view, $params);
-        return str_replace("{{view}}",$viewContent,$_layout);
-    }
-    protected function renderOnlyView($view, $params = []){
-        foreach ($params as $key => $value) {
-            $$key = $value;
-        }
-        ob_start();
-        require_once Application::$ROOT_DIR."/Views/$view.php";
-        return ob_get_clean();
-    }
+    /**
+     * @throws NotFoundException
+     */
     public function resolve()
     {
         $path = $this->request->getPath();
@@ -54,18 +37,21 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
         if ($callback) {
             if(is_string($callback)){
-                return $this->renderView($callback);
-            }elseif(is_array($callback)){  
-                $callback[0] = new $callback[0];
-                Application::$app->setController($callback[0]);
+                return Application::$app->view->renderView($callback);
+            }elseif(is_array($callback)){
+                /** @var Controller $controller */
+                $controller = new $callback[0]();
+                Application::$app->controller = $controller;
+                $controller->action = $callback[1];
+                $callback[0] = $controller;
+                foreach ($controller->getMiddleware() as $Middleware) {
+                    $Middleware->execute();
+                }
             }
             return call_user_func($callback,$this->request,$this->response, $this->session);
             
         }else{
-            Application::$app->response->setStatusCode(404);
-            return $this->renderView("404",[
-                "Title" => "Error 404"
-            ]);
+            throw new NotFoundException();
         }
     }
 }

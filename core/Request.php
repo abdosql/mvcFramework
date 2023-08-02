@@ -10,17 +10,21 @@ class Request
         }
         return $path;
     }
-    public function Method() {
+    public function Method(): string
+    {
         return strtolower($_SERVER["REQUEST_METHOD"]);
     }
-    public function isGet(){
+    public function isGet(): bool
+    {
         return $this->Method() === 'get';
     }
-    public function isPost(){
+    public function isPost(): bool
+    {
         return $this->Method() === 'post';
 
     }
-    public function getBody(){
+    public function getBody(): array
+    {
         $body = [];
         if($this->Method() == "get"){
             foreach ($_GET as $key => $value) {
@@ -35,6 +39,3 @@ class Request
         return $body;
     }
 }
-
-
-?>

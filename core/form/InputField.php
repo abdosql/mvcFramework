@@ -4,63 +4,35 @@ namespace app\core\form;
 
 use app\core\Model;
 
-class Field extends Types
+class InputField extends BaseField
 {
-    //Fields Types
-    private Model $Model;
-    private string $Attribute;
-    private string $Label;
-    private string $Type;
     public function __construct(Model $Model, string $Attribute, string $Label)
     {
-        $this->Model = $Model;
-        $this->Attribute = $Attribute;
-        $this->Label = $Label;
+        parent::__construct($Model, $Attribute, $Label);
         $this->Type = self::TYPE_TEXT;
     }
-    public function __toString()
+    protected string $Type;
+
+    public function TypeText(): InputField
     {
-        $errorMessages = "";
-        if ($this->Model->haseError($this->Attribute)) {
-            foreach ($this->Model->getErrorMessages($this->Attribute) as $message) {
-                $errorMessages .= "$message <br>";
-            }
-        }
-        return sprintf('
-            <div class="form-group mb-3 has-alidation">
-                <label for="%s">%s:</label>
-                <input type="%s" value="%s" class="form-control %s" id="%s" name="%s">
-                <div class="invalid-feedback">
-                %s
-              </div>
-            </div>
-        ',
-            $this->Attribute,
-            $this->Label,
-            $this->Type,
-            $this->Model->{$this->Attribute},
-            $this->Model->haseError($this->Attribute) ? 'is-invalid' : "",
-            $this->Attribute,
-            $this->Attribute,
-            $errorMessages
-        );
-    }
-    public function TypeText(){
         $this->Type = self::TYPE_TEXT;
         return $this;
     }
 
-    public function TypePassword(){
+    public function TypePassword(): InputField
+    {
         $this->Type = self::TYPE_PASSWORD;
         return $this;
     }
 
-    public function TypeEmail(){
+    public function TypeEmail(): InputField
+    {
         $this->Type = self::TYPE_EMAIL;
         return $this;
     }
 
-    public function TypeNumber(){
+    public function TypeNumber(): InputField
+    {
         $this->Type = self::TYPE_NUMBER;
         return $this;
     }
@@ -130,28 +102,44 @@ class Field extends Types
         return $this;
     }
 
-    public function TypeColor(){
+    public function TypeColor(): InputField
+    {
         $this->Type = self::TYPE_COLOR;
         return $this;
     }
 
-    public function TypeRange(){
+    public function TypeRange(): InputField
+    {
         $this->Type = self::TYPE_RANGE;
         return $this;
     }
 
-    public function TypeMonth(){
+    public function TypeMonth(): InputField
+    {
         $this->Type = self::TYPE_MONTH;
         return $this;
     }
 
-    public function TypeWeek(){
+    public function TypeWeek(): InputField
+    {
         $this->Type = self::TYPE_WEEK;
         return $this;
     }
 
-    public function TypeDatetimeLocal(){
+    public function TypeDatetimeLocal(): InputField
+    {
         $this->Type = self::TYPE_DATETIME_LOCAL;
         return $this;
+    }
+
+    public function renderInput(): string
+    {
+        return sprintf('<input type="%s" value="%s" class="form-control %s" id="%s" name="%s">',
+            $this->Type,
+            $this->Model->{$this->Attribute},
+            $this->Model->haseError($this->Attribute) ? 'is-invalid' : "",
+            $this->Attribute,
+            $this->Attribute,
+        );
     }
 }

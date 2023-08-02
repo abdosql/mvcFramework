@@ -1,8 +1,6 @@
 <?php
 
-namespace app\core;
-
-use app\migrations\m0002_second;
+namespace app\core\Database;
 
 class Database
 {

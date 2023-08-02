@@ -2,6 +2,7 @@
 
 namespace app\core;
 
+use app\core\Database\DbModel;
 use Exception;
 
 abstract class UserModel extends DbModel
