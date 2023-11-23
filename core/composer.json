@@ -1,0 +1,11 @@
+{
+    "name": "anh/core",
+    "type": "library",
+    "authors": [
+        {
+            "name": "abdosql",
+            "email": "abdosql@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
